@@ -26,7 +26,9 @@ export default function TabBar({
       }}
     >
       <TabContainer>
-        <TabIconCon onPress={() => navigation.navigate("Home")}>
+        <TabIconCon
+          onPress={() => navigation.navigate("HomeStack", { screen: "Home" })}
+        >
           <TabIcon source={homeIcon} />
           <TabIconText>홈</TabIconText>
         </TabIconCon>
