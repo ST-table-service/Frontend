@@ -1,4 +1,3 @@
-import React from "react";
 import { SafeAreaView, ScrollView, Text, Image, View } from "react-native";
 import styled from "styled-components/native";
 import Logo from "./Logo";
@@ -72,7 +71,7 @@ export default function Login({ navigation }: LoginProps) {
       <ButtonContainer>
         <Button
           title="로그인"
-          screen="Login"
+          screen="Main"
           navigation={navigation}
           buttonColor=" #435fff"
         />
