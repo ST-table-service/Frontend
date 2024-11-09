@@ -7,8 +7,14 @@ import IconContainer from "./IconContainer";
 import { ImageProps, TextProps, View, ViewProps } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { Shadow } from "react-native-shadow-2";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { RootStackParamList } from "./types";
 
-export default function Home() {
+type HomeProps = {
+  navigation: NativeStackNavigationProp<RootStackParamList>;
+};
+
+export default function Home({ navigation }: HomeProps) {
   const thumbsIcon = require("../assets/images/thumbs.png");
   const bunsikIcon = require("../assets/images/bunsik.png");
   const noodleIcon = require("../assets/images/noodle.png");
@@ -31,14 +37,44 @@ export default function Home() {
       <StyledScrollView>
         <MenuContainer>
           <IconRaw1>
-            <IconContainer text="인기메뉴" imageUrl={thumbsIcon} />
-            <IconContainer text="바비든든" imageUrl={bibimbapIcon} />
-            <IconContainer text="포포420" imageUrl={noodleIcon} />
+            <IconContainer
+              text="인기메뉴"
+              imageUrl={thumbsIcon}
+              navigation={navigation}
+              screen="Popular"
+            />
+            <IconContainer
+              text="바비든든"
+              imageUrl={bibimbapIcon}
+              navigation={navigation}
+              screen="Popular"
+            />
+            <IconContainer
+              text="포포420"
+              imageUrl={noodleIcon}
+              navigation={navigation}
+              screen="Popular"
+            />
           </IconRaw1>
           <IconRaw1>
-            <IconContainer text="폭풍분식" imageUrl={bunsikIcon} />
-            <IconContainer text="51장국밥" imageUrl={soupIcon} />
-            <IconContainer text="경성카츠" imageUrl={katsuIcon} />
+            <IconContainer
+              text="폭풍분식"
+              imageUrl={bunsikIcon}
+              navigation={navigation}
+              screen="Popular"
+            />
+            <IconContainer
+              text="51장국밥"
+              imageUrl={soupIcon}
+              navigation={navigation}
+              screen="Popular"
+            />
+            <IconContainer
+              text="경성카츠"
+              imageUrl={katsuIcon}
+              navigation={navigation}
+              screen="Popular"
+            />
           </IconRaw1>
         </MenuContainer>
         <Greating gap="10px">
@@ -53,9 +89,24 @@ export default function Home() {
           </NameRow>
         </Greating>
         <RowContainer>
-          <IconContainer text="스탬프" imageUrl={stampIcon} />
-          <IconContainer text="마이 쿠폰" imageUrl={couponIcon} />
-          <IconContainer text="주문 내역" imageUrl={billIcon} />
+          <IconContainer
+            text="스탬프"
+            imageUrl={stampIcon}
+            navigation={navigation}
+            screen="Popular"
+          />
+          <IconContainer
+            text="마이 쿠폰"
+            imageUrl={couponIcon}
+            navigation={navigation}
+            screen="Popular"
+          />
+          <IconContainer
+            text="주문 내역"
+            imageUrl={billIcon}
+            navigation={navigation}
+            screen="Popular"
+          />
         </RowContainer>
         <NoticeRow>
           <ImageStyled source={require("../assets/images/megaphone.png")} />
