@@ -1,15 +1,20 @@
 import { TouchableOpacity } from "react-native";
 import styled from "styled-components/native";
 
-export default function Logo() {
+interface LogoProps {
+  header?: boolean;
+}
+
+export default function Logo({ header }: LogoProps) {
+  const isHeader = header;
   const LogoContainer = styled.View`
-    width: 100%;
+    /* width: 100%; */
     flex-direction: row;
     justify-content: center;
   `;
 
-  const LogoText = styled.Text`
-    font-size: 75px;
+  const LogoText = styled.Text<{ isHeader?: boolean }>`
+    font-size: ${(props) => (props.isHeader ? "40px" : "75px")};
     text-align: center;
     text-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   `;
@@ -36,10 +41,10 @@ export default function Logo() {
           flexDirection: "row",
         }}
       >
-        <SText>S</SText>
-        <TText>T</TText>
-        <ColonText>:</ColonText>
-        <TableText>table</TableText>
+        <SText isHeader={header}>S</SText>
+        <TText isHeader={header}>T</TText>
+        <ColonText isHeader={header}>:</ColonText>
+        <TableText isHeader={header}>table</TableText>
       </TouchableOpacity>
     </LogoContainer>
   );
