@@ -5,7 +5,7 @@ import { RootStackParamList } from "./types";
 
 type ButtonProps = {
   title: string;
-  navigation: NativeStackNavigationProp<RootStackParamList>;
+  navigation?: NativeStackNavigationProp<RootStackParamList>;
   screen: keyof RootStackParamList;
   buttonColor?: string;
 };
@@ -35,7 +35,7 @@ export default function Button({
     <Button
       bgColor={buttonColor}
       onPress={() => {
-        navigation.navigate(screen);
+        navigation?.navigate(screen);
       }}
     >
       <ButtonText>{title}</ButtonText>
