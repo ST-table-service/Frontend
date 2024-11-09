@@ -25,6 +25,7 @@ export default function Popular() {
           title="삼겹덮밥"
           price="3,500원"
           description="맛난 삼겹살과 쌈장으로 만든 덮밥"
+          popular={true}
         />
         <PopularMenuItem
           image={menuImage1}
@@ -32,6 +33,7 @@ export default function Popular() {
           title="삼겹덮밥"
           price="3,500원"
           description="맛난 삼겹살과 쌈장으로 만든 덮밥"
+          popular={true}
         />
         <PopularMenuItem
           image={menuImage1}
@@ -39,6 +41,7 @@ export default function Popular() {
           title="삼겹덮밥"
           price="3,500원"
           description="맛난 삼겹살과 쌈장으로 만든 덮밥"
+          popular={true}
         />
         <PopularMenuItem
           image={menuImage1}
@@ -46,6 +49,7 @@ export default function Popular() {
           title="삼겹덮밥"
           price="3,500원"
           description="맛난 삼겹살과 쌈장으로 만든 덮밥"
+          popular={true}
         />
         <PopularMenuItem
           image={menuImage1}
@@ -53,6 +57,7 @@ export default function Popular() {
           title="삼겹덮밥"
           price="3,500원"
           description="맛난 삼겹살과 쌈장으로 만든 덮밥"
+          popular={true}
         />
       </ScrollContainer>
     </Container>

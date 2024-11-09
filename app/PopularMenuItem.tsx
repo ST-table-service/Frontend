@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { Text } from "react-native";
 import styled from "styled-components/native";
 interface PopProps {
   restaurant: string;
@@ -6,6 +7,7 @@ interface PopProps {
   title: string;
   description: string;
   price: string;
+  popular?: boolean;
 }
 
 export function PopularMenuItem({
@@ -14,7 +16,15 @@ export function PopularMenuItem({
   title,
   description,
   price,
+  popular,
 }: PopProps) {
+  const [isPopular, setIsPopular] = useState<boolean>(false);
+  useEffect(() => {
+    if (popular) {
+      setIsPopular(popular);
+    }
+  }, [popular]);
+
   return (
     <Container>
       <Restaurant>{restaurant}</Restaurant>
@@ -22,7 +32,10 @@ export function PopularMenuItem({
         <MenuImage source={image} resizeMode={"stretch"} />
         <MenuDetails>
           <MenuRow>
-            <MenuItemText>{title}</MenuItemText>
+            <Row>
+              <MenuItemText>{title}</MenuItemText>
+              {isPopular && <Text>✨</Text>}
+            </Row>
             <PriceText>{price}</PriceText>
           </MenuRow>
           <MenuDescription>{description}</MenuDescription>
@@ -31,6 +44,10 @@ export function PopularMenuItem({
     </Container>
   );
 }
+
+const Row = styled.View`
+  flex-direction: row;
+`;
 
 const Container = styled.View`
   margin: 0 20px 10px 20px;
