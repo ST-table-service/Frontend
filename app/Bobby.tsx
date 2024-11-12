@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { PopularMenuItem } from "./PopularMenuItem";
+import { RestMenuItem } from "./RestMenuItem";
 import { SafeAreaView, ScrollView } from "react-native";
 
 export default function Bobby() {
@@ -7,32 +7,32 @@ export default function Bobby() {
   return (
     <Container>
       <ScrollContainer>
-        <PopularMenuItem
+        <RestMenuItem
           image={menuImage1}
           title="삼겹덮밥"
           price="3,500원"
           description="맛난 삼겹살과 쌈장으로 만든 덮밥"
           popular={true}
         />
-        <PopularMenuItem
+        <RestMenuItem
           image={menuImage1}
           title="삼겹덮밥"
           price="3,500원"
           description="맛난 삼겹살과 쌈장으로 만든 덮밥"
         />
-        <PopularMenuItem
+        <RestMenuItem
           image={menuImage1}
           title="삼겹덮밥"
           price="3,500원"
           description="맛난 삼겹살과 쌈장으로 만든 덮밥"
         />
-        <PopularMenuItem
+        <RestMenuItem
           image={menuImage1}
           title="삼겹덮밥"
           price="3,500원"
           description="맛난 삼겹살과 쌈장으로 만든 덮밥"
         />
-        <PopularMenuItem
+        <RestMenuItem
           image={menuImage1}
           title="삼겹덮밥"
           price="3,500원"
