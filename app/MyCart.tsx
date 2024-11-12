@@ -49,6 +49,7 @@ function MyCart() {
   return (
     <Container>
       <ScrollContainer>
+        <RestaurantName>{"바비든든"}</RestaurantName>
         {menuItems.map((item, index) => (
           <MenuContainer key={index}>
             <MenuImage1
@@ -149,8 +150,7 @@ const Container = styled(SafeAreaView)`
 const ScrollContainer = styled(ScrollView)`
   flex: 1;
   background-color: #ffffff;
-  padding-top: 15px;
-  margin: 0 20px;
+  padding: 15px 20px;
 `;
 
 const MenuContainer = styled.View`
@@ -272,7 +272,7 @@ const ActionButtonContainer = styled.View`
   flex-direction: row;
   align-items: center;
   gap: 40px;
-  margin: auto;
+  margin: 0 auto 40px auto;
 `;
 
 interface ActionButtonProps {
@@ -291,3 +291,10 @@ const ActionButtonText = styled.Text`
 `;
 
 const DeleteButton = styled.TouchableOpacity``;
+
+const RestaurantName = styled.Text`
+  font-size: 30px;
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 20px;
+`;
