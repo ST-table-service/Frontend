@@ -36,7 +36,7 @@ export default function TabBar({
           <TabIcon source={plateIcon} isPlate={true} />
           <TabIconText>주문</TabIconText>
         </PlateIconCon>
-        <TabIconCon>
+        <TabIconCon onPress={() => navigation.navigate("MyPage")}>
           <TabIcon source={profileIcon} resizeMode="contain" />
           <TabIconText>마이페이지</TabIconText>
         </TabIconCon>

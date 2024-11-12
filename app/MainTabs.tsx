@@ -5,6 +5,7 @@ import Home from "./Home";
 import Order from "./Order";
 import HomeStack from "./HomeStack";
 import Header from "./Header";
+import MyPage from "./MyPage";
 
 const Tab = createBottomTabNavigator();
 
@@ -26,6 +27,7 @@ export default function MainTabs() {
     >
       <Tab.Screen name="HomeStack" component={HomeStack} />
       <Tab.Screen name="Order" component={Order} />
+      <Tab.Screen name="MyPage" component={MyPage} />
       {/* <Tab.Screen name="Profile" component={ProfileScreen} /> */}
     </Tab.Navigator>
   );
