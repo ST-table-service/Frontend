@@ -47,13 +47,13 @@ export default function Home({ navigation }: HomeProps) {
               text="바비든든"
               imageUrl={bibimbapIcon}
               navigation={navigation}
-              screen="Popular"
+              screen="Bobby"
             />
             <IconContainer
               text="포포420"
               imageUrl={noodleIcon}
               navigation={navigation}
-              screen="Popular"
+              screen="Bobby"
             />
           </IconRaw1>
           <IconRaw1>
@@ -61,19 +61,19 @@ export default function Home({ navigation }: HomeProps) {
               text="폭풍분식"
               imageUrl={bunsikIcon}
               navigation={navigation}
-              screen="Popular"
+              screen="Bobby"
             />
             <IconContainer
               text="51장국밥"
               imageUrl={soupIcon}
               navigation={navigation}
-              screen="Popular"
+              screen="Bobby"
             />
             <IconContainer
               text="경성카츠"
               imageUrl={katsuIcon}
               navigation={navigation}
-              screen="Popular"
+              screen="Bobby"
             />
           </IconRaw1>
         </MenuContainer>
@@ -99,7 +99,7 @@ export default function Home({ navigation }: HomeProps) {
             text="마이 쿠폰"
             imageUrl={couponIcon}
             navigation={navigation}
-            screen="Popular"
+            screen="Coupon"
           />
           <IconContainer
             text="주문 내역"
