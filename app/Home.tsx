@@ -1,8 +1,5 @@
-import TabBar from "./TabBar";
 import NoticeItem from "./NoticeItem";
-import Header from "./Header";
 import styled from "styled-components/native";
-import Logo from "./Logo";
 import IconContainer from "./IconContainer";
 import { ImageProps, TextProps, View, ViewProps } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
@@ -47,7 +44,7 @@ export default function Home({ navigation }: HomeProps) {
               text="바비든든"
               imageUrl={bibimbapIcon}
               navigation={navigation}
-              screen="Bobby"
+              screen="BobbyStack"
             />
             <IconContainer
               text="포포420"

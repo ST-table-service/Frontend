@@ -13,8 +13,8 @@ export default function MainTabs() {
   return (
     <Tab.Navigator
       screenOptions={{
-        headerShown: true,
-        header: (props) => <Header />,
+        headerShown: false,
+        // header: (props) => <Header />,
       }}
       tabBar={(props) => (
         <TabBar

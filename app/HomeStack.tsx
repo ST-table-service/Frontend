@@ -5,32 +5,38 @@ import Bobby from "./Bobby";
 import Coupon from "./Coupon";
 import MyPage from "./MyPage";
 import Cart from "./Cart";
+import MyCart from "./MyCart";
+import RestaurantHeader from "./RestaurantHeader";
+import Header from "./Header";
+import { Image, Text, TouchableOpacity } from "react-native";
+import BobbyStack from "./BobbyStack";
 const Stack = createNativeStackNavigator();
 export default function HomeStack() {
   return (
-    <Stack.Navigator initialRouteName="Cart">
+    <Stack.Navigator initialRouteName="Home">
       <Stack.Screen
         name="Home"
         component={Home}
         options={{
-          headerShown: false,
+          headerShown: true,
+          header: () => <Header />,
         }}
       />
       <Stack.Screen
         name="Popular"
         component={Popular}
         options={{
-          headerShown: false,
-          //   header: (props) => <CustomHeader {...props} />, // Popular 화면에서는 CustomHeader 사용
+          headerStyle: {
+            backgroundColor: "white",
+          },
+          headerTitleAlign: "center",
+          headerTitle: () => <Text style={{ fontSize: 24 }}>인기메뉴</Text>,
         }}
       />
       <Stack.Screen
-        name="Bobby"
-        component={Bobby}
-        options={{
-          headerShown: false,
-          //   header: (props) => <CustomHeader {...props} />, // Popular 화면에서는 CustomHeader 사용
-        }}
+        name="BobbyStack"
+        component={BobbyStack}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="Cart"
@@ -50,6 +56,14 @@ export default function HomeStack() {
       <Stack.Screen
         name="MyPage"
         component={MyPage}
+        options={{
+          headerShown: false,
+        }}
+      />
+
+      <Stack.Screen
+        name="MyCart"
+        component={MyCart}
         options={{
           headerShown: false,
         }}

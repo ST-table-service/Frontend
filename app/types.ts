@@ -6,4 +6,5 @@ export type RootStackParamList = {
   Popular: undefined;
   Bobby: undefined;
   Coupon: undefined;
+  Cart: undefined;
 };
