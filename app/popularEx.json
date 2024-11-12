@@ -1,0 +1,24 @@
+{
+  "code": "SUCCESS",
+  "message": "인기 메뉴 조회 성공",
+  "data": [
+    {
+      "store_id": 1,
+      "store_name": "바비든든",
+      "menu_id": 1,
+      "menu_name": "삼겹덮밥",
+      "price": 12000,
+      "menu_images": "image_url_0",
+      "description": "맛난 삼겹살과 쌈장으로 만든 덮밥"
+    },
+    {
+      "store_id": 2,
+      "store_name": "포포420",
+      "menu_id": 2,
+      "menu_name": "쌀국수",
+      "price": 8000,
+      "menu_images": "image_url_1",
+      "description": "진한 소고기 육수로 만든 쌀국수"
+    }
+  ]
+}
