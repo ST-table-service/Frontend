@@ -1,43 +1,61 @@
 import { useState } from "react";
-import { Text, TextProps, ViewProps } from "react-native";
+import { Text, TextProps, ViewProps, Image } from "react-native";
 import styled from "styled-components/native";
+
 interface PopProps {
-  restaurant?: string;
-  image: any;
-  title: string;
+  store_name?: string;
+  menu_images: string;
+  menu_name: string;
   description: string;
-  price: string;
+  price: number;
   popular?: boolean;
 }
 
 export function PopularMenuItem({
-  restaurant,
-  image,
-  title,
+  store_name,
+  menu_images,
+  menu_name,
   description,
   price,
-  popular,
+  popular = true,
 }: PopProps) {
-  const [isPopular, setIsPopular] = useState<boolean>(popular || false);
+  const [isPopular] = useState<boolean>(popular);
+
+  // 가격을 한국어 형식으로 포맷팅
+  const formattedPrice = price.toLocaleString() + "원";
 
   return (
     <Container>
-      {restaurant && <Restaurant>{restaurant}</Restaurant>}
-      <MenuContainer isRest={restaurant ? true : false}>
-        {restaurant ? (
-          <MenuImage1 source={image} resizeMode={"stretch"} />
+      {store_name && <Restaurant>{store_name}</Restaurant>}
+      <MenuContainer isRest={store_name ? true : false}>
+        {store_name ? (
+          <MenuImage1
+            source={
+              menu_images.startsWith("http")
+                ? { uri: menu_images }
+                : require("../assets/images/PopMenuItem1.png")
+            }
+            resizeMode={"stretch"}
+          />
         ) : (
-          <MenuImage2 source={image} resizeMode={"stretch"} />
+          <MenuImage2
+            source={
+              menu_images.startsWith("http")
+                ? { uri: menu_images }
+                : require("../assets/images/PopMenuItem1.png")
+            }
+            resizeMode={"stretch"}
+          />
         )}
         <MenuDetails>
-          <MenuRow isRest={restaurant ? true : false}>
+          <MenuRow isRest={store_name ? true : false}>
             <Row>
-              <MenuItemText>{title}</MenuItemText>
+              <MenuItemText>{menu_name}</MenuItemText>
               {isPopular && <Text>✨</Text>}
             </Row>
-            <PriceText>{price}</PriceText>
+            <PriceText>{formattedPrice}</PriceText>
           </MenuRow>
-          <MenuDescription isRest={restaurant ? true : false}>
+          <MenuDescription isRest={store_name ? true : false}>
             {description}
           </MenuDescription>
         </MenuDetails>
