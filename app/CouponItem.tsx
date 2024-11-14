@@ -1,16 +1,49 @@
 import React from "react";
 import styled from "styled-components/native";
-export function CouponItem({ coupon }) {
+
+interface ValidityPeriod {
+  start_date: string;
+  end_date: string;
+}
+
+interface CouponData {
+  coupon_id: number;
+  coupon_name: string;
+  discount_amount: number;
+  store_name: string;
+  validity_period: ValidityPeriod;
+  is_available: boolean;
+}
+
+interface CouponItemProps {
+  coupon: CouponData;
+}
+
+export function CouponItem({ coupon }: CouponItemProps) {
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    return `${date.getFullYear()}.${String(date.getMonth() + 1).padStart(
+      2,
+      "0"
+    )}.${String(date.getDate()).padStart(2, "0")}`;
+  };
+
   return (
     <CouponContainer>
       <CouponDetails>
-        <CouponAmount>{coupon.amount}</CouponAmount>
-        <CouponDescription>{coupon.description}</CouponDescription>
-        <CouponConditions>{coupon.conditions}</CouponConditions>
-        <CouponExpiration>{coupon.expiration}</CouponExpiration>
+        <CouponAmount>{`${coupon.discount_amount.toLocaleString()}원`}</CouponAmount>
+        <CouponDescription>{coupon.coupon_name}</CouponDescription>
+        <CouponConditions>{coupon.store_name}</CouponConditions>
+        <CouponExpiration>
+          {`사용 기한 : ${formatDate(
+            coupon.validity_period.start_date
+          )} - ${formatDate(coupon.validity_period.end_date)}`}
+        </CouponExpiration>
       </CouponDetails>
-      <UseButton>
-        <UseButtonText>{"사용 가능"}</UseButtonText>
+      <UseButton available={coupon.is_available}>
+        <UseButtonText>
+          {coupon.is_available ? "사용 가능" : "사용 불가"}
+        </UseButtonText>
       </UseButton>
     </CouponContainer>
   );
@@ -55,10 +88,14 @@ const CouponExpiration = styled.Text`
   font-size: 13px;
 `;
 
-const UseButton = styled.View`
+interface UseButtonProps {
+  available: boolean;
+}
+
+const UseButton = styled.View<UseButtonProps>`
   width: 100px;
   align-items: center;
-  background-color: #435fff;
+  background-color: ${(props) => (props.available ? "#435fff" : "#949494")};
   border-color: #000000;
   border-radius: 50px;
   border-width: 1px;

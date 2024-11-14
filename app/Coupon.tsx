@@ -1,36 +1,54 @@
 import { CouponItem } from "./CouponItem";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components/native";
-import { SafeAreaView, ScrollView, Image, Text } from "react-native";
+import axios from "axios";
+import { Alert } from "react-native";
+import { CouponData } from "./types";
+import couponjson from "./json/coupon.json";
+
+const BASE_URL = "서버_BASE_URL"; // 실제 서버 URL로 교체 필요
 
 const Coupon = () => {
-  const d = [
-    {
-      amount: "1,000원",
-      description: "할인 쿠폰",
-      conditions: "5,000원 이상 구매 시 사용 가능",
-      expiration: "사용 기한 : 0000.00.00 - 0000.00.00",
-    },
-    {
-      amount: "2,000원",
-      description: "할인 쿠폰",
-      conditions: "7,000원 이상 구매 시 사용 가능",
-      expiration: "사용 기한 : 0000.00.00 - 0000.00.00",
-    },
-    {
-      amount: "천원의 아침밥",
-      description: "쿠폰",
-      conditions: "0원 이상 구매 시 사용 가능",
-      expiration: "사용 기한 : 0000.00.00 - 0000.00.00",
-    },
-  ];
+  const [coupons, setCoupons] = useState<CouponData[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const fetchCoupons = async () => {
+    try {
+      // const response = await axios.get(`${BASE_URL}/coupons`);
+      const response = couponjson;
+      // if (response.data.data) {
+      //   setCoupons(response.data.data);
+      // }
+      setCoupons(couponjson.data);
+    } catch (error) {
+      Alert.alert("오류", "쿠폰 정보를 불러오는데 실패했습니다.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchCoupons();
+  }, []);
+
+  if (isLoading) {
+    return (
+      <Container>
+        <LoadingText>로딩중...</LoadingText>
+      </Container>
+    );
+  }
+
   return (
     <Container>
       <ScrollContainer>
-        {/* 쿠폰 항목들 반복 */}
-        {d.map((coupon, index) => (
-          <CouponItem key={index} coupon={coupon} />
-        ))}
+        {coupons.length === 0 ? (
+          <EmptyText>사용 가능한 쿠폰이 없습니다</EmptyText>
+        ) : (
+          coupons.map((coupon) => (
+            <CouponItem key={coupon.coupon_id} coupon={coupon} />
+          ))
+        )}
       </ScrollContainer>
     </Container>
   );
@@ -47,4 +65,18 @@ const ScrollContainer = styled.ScrollView`
   flex: 1;
   background-color: #ffffff;
   padding-top: 17px;
+`;
+
+const LoadingText = styled.Text`
+  text-align: center;
+  margin-top: 20px;
+  font-size: 16px;
+  color: #435fff;
+`;
+
+const EmptyText = styled.Text`
+  text-align: center;
+  margin-top: 20px;
+  font-size: 16px;
+  color: #666666;
 `;
