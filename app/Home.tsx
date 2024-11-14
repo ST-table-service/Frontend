@@ -1,15 +1,29 @@
 import NoticeItem from "./NoticeItem";
 import styled from "styled-components/native";
 import IconContainer from "./IconContainer";
-import { ImageProps, TextProps, View, ViewProps } from "react-native";
-import { SafeAreaProvider } from "react-native-safe-area-context";
-import { Shadow } from "react-native-shadow-2";
+import {
+  FlatList,
+  ImageProps,
+  ListRenderItem,
+  TextProps,
+  View,
+  ViewProps,
+} from "react-native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "./types";
+import { useEffect, useState } from "react";
+import noticeJson from "./json/notice.json";
 
 type HomeProps = {
   navigation: NativeStackNavigationProp<RootStackParamList>;
 };
+interface Notice {
+  id: number;
+  storeId: number;
+  storeName: string;
+  title: string;
+  createdAt: string;
+}
 
 export default function Home({ navigation }: HomeProps) {
   const thumbsIcon = require("../assets/images/thumbs.png");
@@ -25,13 +39,51 @@ export default function Home({ navigation }: HomeProps) {
 
   const notice1 = require("../assets/images/notice1.png");
 
-  const homeIcon = require("../assets/images/home.png");
-  const profileIcon = require("../assets/images/profile.png");
-  const plateIcon = require("../assets/images/plate.png");
+  const [notices, setNotices] = useState<Notice[]>([]);
+
+  useEffect(() => {
+    const fetchNotices = async () => {
+      try {
+        // const response = await fetch("YOUR_API_URL"); // 여기에 API URL을 입력하세요
+        // const data = await response.json();
+        const data = noticeJson;
+        if (data.code === "") {
+          // 서버 응답 코드 확인
+          setNotices(data.data);
+        } else {
+          console.error(data.message);
+        }
+      } catch (error) {
+        console.error("Failed to fetch notices:", error);
+      }
+    };
+
+    fetchNotices();
+  }, []);
+
+  const renderNoticeItem: ListRenderItem<Notice> = ({ item }) => (
+    <NoticeItem
+      date={new Date(item.createdAt).toLocaleDateString()} // 날짜 포맷
+      restaurant={item.storeName}
+      content={item.title}
+      image={require("../assets/images/notice1.png")} // 공지사항 이미지
+    />
+  );
 
   return (
     <Container>
       <StyledScrollView>
+        <Greating gap="10px">
+          <TextStyled fontSize={28} bold={false}>
+            {"어서오세요!"}
+          </TextStyled>
+          <NameRow>
+            <TextStyled fontSize={28} bold={true}>
+              {"희진"}
+            </TextStyled>
+            <TextStyled fontSize={26}> {"님"}</TextStyled>
+          </NameRow>
+        </Greating>
         <MenuContainer>
           <IconRaw1>
             <IconContainer
@@ -74,18 +126,8 @@ export default function Home({ navigation }: HomeProps) {
             />
           </IconRaw1>
         </MenuContainer>
-        <Greating gap="10px">
-          <TextStyled fontSize={28} bold={false}>
-            {"어서오세요!"}
-          </TextStyled>
-          <NameRow>
-            <TextStyled fontSize={28} bold={true}>
-              {"희진"}
-            </TextStyled>
-            <TextStyled fontSize={26}> {"님"}</TextStyled>
-          </NameRow>
-        </Greating>
-        <RowContainer>
+
+        {/* <RowContainer>
           <IconContainer
             text="스탬프"
             imageUrl={stampIcon}
@@ -104,16 +146,16 @@ export default function Home({ navigation }: HomeProps) {
             navigation={navigation}
             screen="Popular"
           />
-        </RowContainer>
+        </RowContainer> */}
         <NoticeRow>
           <ImageStyled source={require("../assets/images/megaphone.png")} />
           <NoticeBoardText>{"공지사항"}</NoticeBoardText>
         </NoticeRow>
-        <NoticeItem
-          date=" 24.10.13 "
-          restaurant="경성카츠"
-          content="오늘 왕돈가스 품절됐습니다 ㅠㅠ"
-          image={notice1}
+        <FlatList
+          data={notices}
+          renderItem={renderNoticeItem}
+          keyExtractor={(item) => item.id.toString()}
+          contentContainerStyle={{ paddingBottom: 20 }} // 여백 추가
         />
       </StyledScrollView>
     </Container>
@@ -136,7 +178,7 @@ const MenuContainer = styled.View`
   border-radius: 20px;
   border-width: 2px;
   padding: 22px 54px;
-  margin: 0 20px 20px;
+  margin: 0 20px 30px;
   gap: 30px;
 `;
 
@@ -166,6 +208,7 @@ const Greating = styled(Row)`
   text-align: center;
   align-items: baseline;
   justify-content: center;
+  margin: 20px 0;
 `;
 const RowContainer = styled(Row)`
   justify-content: space-evenly;
@@ -185,11 +228,12 @@ const NoticeRow = styled(Row)`
   justify-content: center;
   align-items: center;
   gap: 10px;
+  margin-bottom: 15px;
 `;
 const NameRow = styled(Row)`
   align-items: baseline;
 `;
 const NoticeBoardText = styled.Text`
-  font-size: 22px;
+  font-size: 24px;
   padding-right: 20px;
 `;
