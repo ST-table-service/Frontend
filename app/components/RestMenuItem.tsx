@@ -1,13 +1,17 @@
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useState } from "react";
 import { Text, TextProps, ViewProps } from "react-native";
 import styled from "styled-components/native";
+import { RootStackParamList } from "../types";
 interface PopProps {
   restaurant?: string;
   image: any;
   title: string;
+  screen: keyof RootStackParamList;
   description: string;
   price: string;
   popular?: boolean;
+  navigation: NativeStackNavigationProp<RootStackParamList>;
 }
 
 export function RestMenuItem({
@@ -17,11 +21,16 @@ export function RestMenuItem({
   description,
   price,
   popular,
+  navigation,
 }: PopProps) {
   const [isPopular, setIsPopular] = useState<boolean>(popular || false);
 
   return (
-    <Container>
+    <Container
+      onPress={(navigation) => {
+        navigation.navigate(title);
+      }}
+    >
       {restaurant && <Restaurant>{restaurant}</Restaurant>}
       <MenuContainer isRest={restaurant ? true : false}>
         {restaurant ? (
